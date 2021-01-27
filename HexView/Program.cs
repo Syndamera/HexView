@@ -6,7 +6,16 @@ namespace HexView
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int decimalNumber = 14;
+            char hexChar;
+            
+            int value = 255;
+
+            // use X to display in dec <> hex
+            Console.WriteLine(value.ToString("X4") + "h");
+
+            value = 0xAA;
+            Console.WriteLine(value.ToString("X4") + "h");
         }
     }
 }
