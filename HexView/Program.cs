@@ -5,17 +5,14 @@ namespace HexView
 {
     class Program
     {
-        // read in a decimal value
-        // conversion table 0-9 & 10-16 = 0-9 & A-F by using switch?
-
         static void Main(string[] args)
         {
-            int value = 255;
             Console.Write("Enter a decimal number 0-{0:D}", UInt16.MaxValue + ": ");
 
             string input = Console.ReadLine();
             if(!string.IsNullOrEmpty(input))
             {
+                // have to do a check that its a number and not characters
                 int number = int.Parse(input);
                 if (number <= UInt16.MaxValue && number > 0)
                 {
@@ -32,6 +29,17 @@ namespace HexView
             {
                 Console.WriteLine("ERROR: No input entered.");
             }
+
+            Console.Write("Enter a hexidecimal number 0000-FFFF: ");
+            // have to check that we don't accept other characters than numbers
+            // and A-F, lowercase or uppercase and convert lower to uppercase.
+            input = Console.ReadLine().ToUpper();
+            if(!string.IsNullOrEmpty(input))
+            {
+                int value = HexToDec(input);
+                Console.WriteLine(input + "h is " + value +"d");
+            }
+
 
             /*
             string temp = DecToHex(15);
@@ -79,15 +87,15 @@ namespace HexView
             return appendedStr;
         }
 
-        public static int HexToDec(string value)
+        public static int HexToDec(string str)
         {
             int result = 0;
-            int count = value.Length - 1;
+            int count = str.Length - 1;
 
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < str.Length; i++)
             {
                 int decValue;
-                switch (value[i])
+                switch (str[i])
                 {
                     case 'A':
                         {
@@ -121,7 +129,7 @@ namespace HexView
                         break;
                     default:
                         {
-                            decValue = -48 + (int)value[i]; // ASCII value for '0'
+                            decValue = -48 + (int)str[i]; // ASCII value for '0'
                         } break;
                 }
                 result += decValue * (int)Math.Pow(16, count);
