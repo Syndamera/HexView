@@ -10,33 +10,26 @@ namespace HexView
 
         static void Main(string[] args)
         {
-            int decimalNumber = 255;
-            char hexChar;
-            
             int value = 255;
-
-            Console.WriteLine("Enter a decimal numnber: ");
+            
+            Console.WriteLine("Enter a decimal number: ");
             int number = int.Parse(Console.ReadLine());
 
-            string number2Hex = DecToHex(number);
-            string appendedStr = LeftPadding(number2Hex);
-            Console.WriteLine(appendedStr);
-
-            // use X to display in dec <> hex
-            
-            Console.WriteLine(value.ToString("X4") + "h");
-
-            // decimal > hex
-            Console.WriteLine(string.Format("{0:X4}", decimalNumber));
+            if(number <= 65535)
+            {
+                string number2Hex = DecToHex(number);
+                string appendedStr = LeftPadding(number2Hex);
+                Console.WriteLine(appendedStr);
+            }
 
             string temp = DecToHex(15);
-            Console.WriteLine("TESTING:" + temp);
+            Console.WriteLine("DecToHex: " + temp);
 
-            decimalNumber = HexToDec(temp);
-            Console.WriteLine(decimalNumber);
+            int decimalNumber = HexToDec("FFFF");
+            Console.WriteLine("HexToDec: " + decimalNumber);
 
             DecToHex(value);
-            Console.WriteLine("VALUE: " + value);
+            Console.WriteLine("DecToHex: " + value);
         }
 
         public static string LeftPadding(string str)
@@ -54,7 +47,6 @@ namespace HexView
                 for(int i = 0; i < zeroesToAppend; i++)
                 {
                     appendedString += "0";
-
                 }
                 appendedString += str;
                 // append "h" to the end of the string array
