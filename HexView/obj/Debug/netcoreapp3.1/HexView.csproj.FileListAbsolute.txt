@@ -4,7 +4,6 @@ C:\Users\rockt\source\repos\HexView\HexView\bin\Debug\netcoreapp3.1\HexView.runt
 C:\Users\rockt\source\repos\HexView\HexView\bin\Debug\netcoreapp3.1\HexView.runtimeconfig.dev.json
 C:\Users\rockt\source\repos\HexView\HexView\bin\Debug\netcoreapp3.1\HexView.dll
 C:\Users\rockt\source\repos\HexView\HexView\bin\Debug\netcoreapp3.1\HexView.pdb
-C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.csprojAssemblyReference.cache
 C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.AssemblyInfoInputs.cache
 C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.AssemblyInfo.cs
 C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.csproj.CoreCompileInputs.cache
