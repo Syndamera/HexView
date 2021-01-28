@@ -12,9 +12,13 @@ namespace HexView
             string input = Console.ReadLine();
             if(!string.IsNullOrEmpty(input))
             {
-                // have to do a check that its a number and not characters
-                int number = int.Parse(input);
-                if (number <= UInt16.MaxValue && number > 0)
+                // check that its a number character and not characters
+                int number;
+                if(!int.TryParse(input, out number))
+                {
+                    Console.WriteLine("ERROR: Illegal characters.");
+                }
+                else if (number <= UInt16.MaxValue && number > 0)
                 {
                     string number2Hex = DecToHex(number);
                     string appendedStr = LeftPadding(number2Hex);
