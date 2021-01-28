@@ -1,14 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HexView
 {
     class Program
     {
+        struct AminoAcid
+        {
+            AminoAcidTable ID;
+            string code;
+        }
+        enum AminoAcidTable
+        {
+            UUU,
+            UUC,
+            UUA,
+            UUG
+        }
+
+        // The user input a DNA sequence (A,G,C,T) - only accepts these characters.
+        // Translate DNA sequence to Amino Acid - Match a sequence of 3 to corresponding Amino Acid
+        // Lookup: Amino Acid Table > ENUM
+        // Print out the correct one letter code
+        // This below is called reading frame. Only applies if we have a remainder from the DNA sequence.
+        // xxx xxx xx = start || x xxx xxx x = middle || xx xxx xxx = end
+        // Check the 3s in the sequence and print out from start 3's, middle 3's and from the end 3's.
+
+
         static void Main(string[] args)
         {
-            Console.Write("Enter a decimal number 0-{0:D}", UInt16.MaxValue + ": ");
+            Console.Write("Enter a decimal number 0-{0:D}", uint.MaxValue + ": ");
 
             string input = Console.ReadLine();
             if(!string.IsNullOrEmpty(input))
@@ -19,10 +40,11 @@ namespace HexView
                 {
                     Console.WriteLine("ERROR: Illegal characters.");
                 }
-                else if (number <= UInt16.MaxValue && number > 0)
+                // TODO: if entered a higher value than uint16.max clamp it to uint16.max
+                else if (number <= uint.MaxValue && number > 0)
                 {
                     string number2Hex = DecToHex(number);
-                    string appendedStr = LeftPadding(number2Hex, 4);
+                    string appendedStr = LeftPadding(number2Hex, 8);
                     Console.WriteLine(number + "d " + "is " + appendedStr + "h");
                 }
                 else
@@ -45,6 +67,10 @@ namespace HexView
                 int value = HexToDec(result);
                 Console.WriteLine();
                 Console.WriteLine(result + "h is " + value + "d");
+            }
+            else
+            {
+                Console.WriteLine("ERROR: No input entered.");
             }
         }
 
@@ -84,7 +110,7 @@ namespace HexView
         {
             // 2 % 4 = 2 and 4 % 4 = 0 which we then skip and
             // returns the original string untouched.
-            // (lenght - remainder)
+            // (length - remainder)
             string appendedStr = string.Empty;
             if (str.Length <= numberOfBits)
             {
