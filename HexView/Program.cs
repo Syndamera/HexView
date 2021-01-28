@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace HexView
 {
@@ -14,7 +15,15 @@ namespace HexView
             
             int value = 255;
 
+            Console.WriteLine("Enter a decimal numnber: ");
+            int number = int.Parse(Console.ReadLine());
+
+            string number2Hex = DecToHex(number);
+            string appendedStr = LeftPadding(number2Hex);
+            Console.WriteLine(appendedStr);
+
             // use X to display in dec <> hex
+            
             Console.WriteLine(value.ToString("X4") + "h");
 
             // decimal > hex
@@ -23,8 +32,36 @@ namespace HexView
             string temp = DecToHex(15);
             Console.WriteLine("TESTING:" + temp);
 
-            decimalNumber = HexToDec("FF");
+            decimalNumber = HexToDec(temp);
             Console.WriteLine(decimalNumber);
+
+            DecToHex(value);
+            Console.WriteLine("VALUE: " + value);
+        }
+
+        public static string LeftPadding(string str)
+        {
+            // 2 % 4 = 0.5 remainder = 2
+            // (lenght - remainder) "/ 4"
+            int numberOfBits = 4;
+            string appendedString = string.Empty;
+            if (str.Length < numberOfBits)
+            {
+                int remainder = str.Length % numberOfBits;
+                int zeroesToAppend = numberOfBits - remainder;
+                // append 0 to string pos 0
+
+                for(int i = 0; i < zeroesToAppend; i++)
+                {
+                    appendedString += "0";
+
+                }
+                appendedString += str;
+                // append "h" to the end of the string array
+                //appendedString += "h";
+            }
+
+            return appendedString;
         }
 
         public static int HexToDec(string value)
@@ -81,7 +118,7 @@ namespace HexView
 
         public static string DecToHex(int value)
         {
-            string result = "";
+            string result = string.Empty;
 
             while(value != 0)
             {
