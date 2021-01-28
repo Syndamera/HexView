@@ -10,3 +10,4 @@ C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.cspr
 C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.dll
 C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.pdb
 C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.genruntimeconfig.cache
+C:\Users\rockt\source\repos\HexView\HexView\obj\Debug\netcoreapp3.1\HexView.csprojAssemblyReference.cache

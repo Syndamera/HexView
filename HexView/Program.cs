@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace HexView
@@ -34,15 +35,24 @@ namespace HexView
                 Console.WriteLine("ERROR: No input entered.");
             }
 
-            Console.Write("Enter a hexidecimal number 0000-FFFF: ");
+
             // have to check that we don't accept other characters than numbers
             // and A-F, lowercase or uppercase and convert lower to uppercase.
-            input = Console.ReadLine().ToUpper();
+            Console.Write("Enter a hexidecimal number 0000-FFFF: ");
+            string result = ReadHex(4).ToUpper();
+            if(!string.IsNullOrEmpty(result))
+            {
+                int value = HexToDec(result);
+                Console.WriteLine();
+                Console.WriteLine(result + "h is " + value + "d");
+            }
+
+            /*input = Console.ReadLine().ToUpper();
             if(!string.IsNullOrEmpty(input))
             {
                 int value = HexToDec(input);
                 Console.WriteLine(input + "h is " + value +"d");
-            }
+            }*/
 
 
             /*
@@ -55,6 +65,37 @@ namespace HexView
             DecToHex(value);
             Console.WriteLine("DecToHex: " + value);
             */
+        }
+
+        public static string ReadHex(int numberOfBits)
+        {
+            string legalChars = "0123456789abcdefABCDEF";
+
+            ConsoleKeyInfo read = new ConsoleKeyInfo();
+            List<char> outChar = new List<char>();
+
+            while (!(read.Key == ConsoleKey.Enter && outChar.Count > 0))
+            {
+                read = Console.ReadKey(true);
+                if (legalChars.Contains(read.KeyChar.ToString()) && outChar.Count < numberOfBits)
+                {
+                    outChar.Add(read.KeyChar);
+                    Console.Write(read.KeyChar.ToString());
+                }
+                if (read.Key == ConsoleKey.Backspace)
+                {
+                    if (outChar.Count > 0)
+                    {
+                        outChar.RemoveAt(outChar.Count - 1);
+                        Console.CursorLeft--;
+                        Console.Write(" ");
+                        Console.CursorLeft--;
+                    }
+                }
+            }
+
+            string str = string.Join("", outChar.ToArray());
+            return str;
         }
 
         public static string LeftPadding(string str)
