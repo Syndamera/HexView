@@ -11,17 +11,29 @@ namespace HexView
         static void Main(string[] args)
         {
             int value = 255;
-            
-            Console.WriteLine("Enter a decimal number: ");
-            int number = int.Parse(Console.ReadLine());
+            Console.Write("Enter a decimal number 0-{0:D}", UInt16.MaxValue + ": ");
 
-            if(number <= 65535)
+            string input = Console.ReadLine();
+            if(!string.IsNullOrEmpty(input))
             {
-                string number2Hex = DecToHex(number);
-                string appendedStr = LeftPadding(number2Hex);
-                Console.WriteLine(appendedStr);
+                int number = int.Parse(input);
+                if (number <= UInt16.MaxValue && number > 0)
+                {
+                    string number2Hex = DecToHex(number);
+                    string appendedStr = LeftPadding(number2Hex);
+                    Console.WriteLine(number + "d " + "is " + appendedStr + "h");
+                }
+                else
+                {
+                    Console.WriteLine("ERROR: Your input is out of bounds.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("ERROR: No input entered.");
             }
 
+            /*
             string temp = DecToHex(15);
             Console.WriteLine("DecToHex: " + temp);
 
@@ -30,6 +42,7 @@ namespace HexView
 
             DecToHex(value);
             Console.WriteLine("DecToHex: " + value);
+            */
         }
 
         public static string LeftPadding(string str)
@@ -37,23 +50,33 @@ namespace HexView
             // 2 % 4 = 0.5 remainder = 2
             // (lenght - remainder) "/ 4"
             int numberOfBits = 4;
-            string appendedString = string.Empty;
-            if (str.Length < numberOfBits)
+            string appendedStr = string.Empty;
+            if (str.Length <= numberOfBits)
             {
                 int remainder = str.Length % numberOfBits;
                 int zeroesToAppend = numberOfBits - remainder;
-                // append 0 to string pos 0
 
-                for(int i = 0; i < zeroesToAppend; i++)
+                // Check that we have a remainder higer than 0
+                // else we just return the str unchanged.
+                if(remainder > 0)
                 {
-                    appendedString += "0";
+                    for (int i = 0; i < zeroesToAppend; i++)
+                    {
+                        // append 0 to the string array at pos 0
+                        appendedStr += "0";
+                    }
                 }
-                appendedString += str;
+                else
+                {
+                    return str;
+                }
+
+                appendedStr += str;
                 // append "h" to the end of the string array
                 //appendedString += "h";
             }
 
-            return appendedString;
+            return appendedStr;
         }
 
         public static int HexToDec(string value)
