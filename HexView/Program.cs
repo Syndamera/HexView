@@ -22,7 +22,7 @@ namespace HexView
                 else if (number <= UInt16.MaxValue && number > 0)
                 {
                     string number2Hex = DecToHex(number);
-                    string appendedStr = LeftPadding(number2Hex);
+                    string appendedStr = LeftPadding(number2Hex, 4);
                     Console.WriteLine(number + "d " + "is " + appendedStr + "h");
                 }
                 else
@@ -46,25 +46,6 @@ namespace HexView
                 Console.WriteLine();
                 Console.WriteLine(result + "h is " + value + "d");
             }
-
-            /*input = Console.ReadLine().ToUpper();
-            if(!string.IsNullOrEmpty(input))
-            {
-                int value = HexToDec(input);
-                Console.WriteLine(input + "h is " + value +"d");
-            }*/
-
-
-            /*
-            string temp = DecToHex(15);
-            Console.WriteLine("DecToHex: " + temp);
-
-            int decimalNumber = HexToDec("FFFF");
-            Console.WriteLine("HexToDec: " + decimalNumber);
-
-            DecToHex(value);
-            Console.WriteLine("DecToHex: " + value);
-            */
         }
 
         public static string ReadHex(int numberOfBits)
@@ -98,11 +79,12 @@ namespace HexView
             return str;
         }
 
-        public static string LeftPadding(string str)
+        // maybe change this to bytes, to control number of bits.
+        public static string LeftPadding(string str, int numberOfBits)
         {
-            // 2 % 4 = 0.5 remainder = 2
-            // (lenght - remainder) "/ 4"
-            int numberOfBits = 4;
+            // 2 % 4 = 2 and 4 % 4 = 0 which we then skip and
+            // returns the original string untouched.
+            // (lenght - remainder)
             string appendedStr = string.Empty;
             if (str.Length <= numberOfBits)
             {
@@ -125,8 +107,6 @@ namespace HexView
                 }
 
                 appendedStr += str;
-                // append "h" to the end of the string array
-                //appendedString += "h";
             }
 
             return appendedStr;
